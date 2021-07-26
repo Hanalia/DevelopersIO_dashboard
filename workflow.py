@@ -5,14 +5,14 @@ from requests.exceptions import HTTPError
 import urllib.parse
 import json
 from bs4 import BeautifulSoup as bs
-
+import os
 ## dependencies
 # pandas
 # requests
 # bs4
 
 # needs to import KEY from secrets
-KEY = ''
+KEY = os.environ['GOOGLE_KEY']
 filepath = './src/mydata/data.json'
 ## step 1 : import json file to df
 df1 = pd.read_json(filepath)
@@ -92,6 +92,12 @@ def google_translate(api_key, text_to_translate, to_language):
     translated_text = translated_text.replace('0x0A', '\\n')
     return translated_text
 
+
+## to save resources, drop common values between df1(orignal data) and df2( new data)
+cond = df2['url'].isin(df1['url'])
+df2.drop(df2[cond].index, inplace = True)
+
+# add trans from df2
 
 df2 = add_trans(df2,'title',KEY,'en')
 

@@ -2,13 +2,13 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
 name: Python package
-# on: push
-on:
-  schedule:
-    # 실제 스케쥴 작업이 시작될 cron을 등록하면 됩니다.
-    # 크론은 https://crontab.guru/ 여기서 확인하면 좋을 것 같습니다.
-    # 이 크론은 한국시간 수, 금 00시에 실행됩니다.
-    - cron:  '0 15 * * 2,4'
+on: push
+# on:
+#   schedule:
+#     # 실제 스케쥴 작업이 시작될 cron을 등록하면 됩니다.
+#     # 크론은 https://crontab.guru/ 여기서 확인하면 좋을 것 같습니다.
+#     # 이 크론은 everyday 00 am 
+#     - cron:  '0 0 * * *'
 jobs:
   build:
 
@@ -37,12 +37,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python3 rec_actions.py
+        python3 workflow.py
+      env:
+        GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
     - name: Commits
       run: |
         git config --local user.email "davethe@naver.com"
-        git config --local user.name "REC_Auto" 
-        git add ./src/mydata/github_recdata.json
+        git config --local user.name "developers_Auto" 
+        git add ./src/mydata/data.json
         git commit -m "Auto - Update data with Scraping"
         git pull origin master
     - name: Push
