@@ -106,15 +106,18 @@ df2 = add_trans(df2,'title',KEY,'en')
 
 ## concat original df and new df, also delete dupicates
 
+# 합치기 전 df2의 string -> datetime conversion (왜인지는 하단 설명)
+df2['date'] =pd.to_datetime(df2['date'], format='%Y-%m-%d')
+
 # 합치기
 finaldf = pd.concat([df1,df2],ignore_index=True)
 
 # 혹시 모르니 drop duplicates 해주기
 finaldf = finaldf.drop_duplicates('url')
 
-# 내가 원하는 형식으로 바꿔주기 날짜는
+# 내가 원하는 형식으로 바꿔주기 날짜는 (df loaded from json is datetime, parsed new date is string so string->datetime conversion before is needed)
+
+
+
 finaldf['date'] = finaldf['date'].dt.strftime('%Y-%m-%d')
 
-
-# finaldf를 다시 저장
-finaldf.to_json(filepath, orient='records')
