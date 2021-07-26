@@ -121,3 +121,5 @@ finaldf = finaldf.drop_duplicates('url')
 
 finaldf['date'] = finaldf['date'].dt.strftime('%Y-%m-%d')
 
+# finaldf를 다시 저장
+finaldf.to_json(filepath, orient='records')
