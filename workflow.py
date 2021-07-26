@@ -117,7 +117,7 @@ finaldf = finaldf.drop_duplicates('url')
 
 # 내가 원하는 형식으로 바꿔주기 날짜는 (df loaded from json is datetime, parsed new date is string so string->datetime conversion before is needed)
 
-
+#git 
 
 finaldf['date'] = finaldf['date'].dt.strftime('%Y-%m-%d')
 
