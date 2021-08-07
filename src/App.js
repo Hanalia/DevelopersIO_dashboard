@@ -39,7 +39,7 @@ function Table({ columns, data }) {
       {
           columns,
           data,
-          initialState: { pageIndex: 2, pageSize: 5 },
+          initialState: { pageIndex: 0, pageSize: 5 },
       },
       useSortBy,
 
@@ -176,7 +176,7 @@ function PaginationTableComponent() {
 
        const data = React.useMemo(
     () => mydata,
-    []
+    [ mydata ]
   )
 
 
