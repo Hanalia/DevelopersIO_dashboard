@@ -116,8 +116,8 @@ finaldf = pd.concat([df1,df2],ignore_index=True)
 finaldf = finaldf.drop_duplicates('url')
 
 
-## 최신 날짜가 맨 상단에 뜨게 sort
-finaldf = final.sort_values(by='date',ascending=False)
+# ## 최신 날짜가 맨 상단에 뜨게 sort
+# finaldf = finaldf.sort_values(by='date',ascending=False)
 
 
 # 내가 원하는 형식으로 바꿔주기 날짜는 (df loaded from json is datetime, parsed new date is string so string->datetime conversion before is needed)

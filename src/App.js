@@ -21,31 +21,40 @@ const Styles = styled.div`
 function Table({ columns, data }) {
     // Use the state and functions returned from useTable to build your UI
     const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      prepareRow,
-      page,
-      canPreviousPage,
-      canNextPage,
-      pageOptions,
-      pageCount,
-      gotoPage,
-      nextPage,
-      previousPage,
-      setPageSize,
-      state: { pageIndex, pageSize },
-  } = useTable(
-      {
-          columns,
-          data,
-          initialState: { pageIndex: 0, pageSize: 5 },
-      },
-      useSortBy,
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        prepareRow,
+        page,
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
+        state: { pageIndex, pageSize },
+    } = useTable(
+        {
+            columns,
+            data,
+            initialState: {
+                pageIndex: 0,
+                pageSize: 10,
+                sortBy: [
+                    {
+                        id: 'date',
+                        desc: true
+                    }
+                ]
+            },
+        },
+        useSortBy,
 
-      usePagination
+        usePagination
 
-  )
+    )
     // Render the UI for your table
     return (
         <div>
@@ -55,16 +64,16 @@ function Table({ columns, data }) {
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
                                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                  {column.render('Header')}
-                                  <span>
+                                    {column.render('Header')}
+                                    <span>
                                         {column.isSorted
                                             ? column.isSortedDesc
                                                 ? ' 🔽'
                                                 : ' 🔼'
                                             : ''}
-                                    </span>                         
-                                  
-                                  </th>
+                                    </span>
+
+                                </th>
                             ))}
                         </tr>
                     ))}
@@ -143,46 +152,46 @@ function Table({ columns, data }) {
 function PaginationTableComponent() {
 
     const columns = React.useMemo(
-  () => [
-   {
-     Header: 'Date',
-     accessor: 'date',
-    //  width: 100,
-   },
-   {
-     Header: 'Title',
-     accessor: 'title',
-     className: "title",
-    //  width: 250,
-     Cell: ({ row }) => <a href={row.original.url}>{row.original.title}</a>,
-   },
-   {
-      Header: 'Title(en)',
-      accessor: 'translated',
-      className: "title",
-      // width: 250,  
-   },
-   {
-     Header: 'Likes',
-     accessor: 'likes',
-    //  width: 60,
+        () => [
+            {
+                Header: 'Date',
+                accessor: 'date',
+                //  width: 100,
+            },
+            {
+                Header: 'Title',
+                accessor: 'title',
+                className: "title",
+                //  width: 250,
+                Cell: ({ row }) => <a href={row.original.url}>{row.original.title}</a>,
+            },
+            {
+                Header: 'Title(en)',
+                accessor: 'translated',
+                className: "title",
+                // width: 250,  
+            },
+            {
+                Header: 'Likes',
+                accessor: 'likes',
+                //  width: 60,
 
-   },
-   
-  ],
-  []
-  )
+            },
+
+        ],
+        []
+    )
 
 
-       const data = React.useMemo(
-    () => mydata,
-    [ mydata ]
-  )
+    const data = React.useMemo(
+        () => mydata,
+        [mydata]
+    )
 
 
     return (
-      <Styles>
-        <Table columns={columns} data={data} />
+        <Styles>
+            <Table columns={columns} data={data} />
         </Styles>
     )
 }
