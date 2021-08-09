@@ -191,7 +191,7 @@ function PaginationTableComponent() {
             },
 
         ],
-        []
+        [processData(mydata)]
     )
 
     function processData(jsonData) {
