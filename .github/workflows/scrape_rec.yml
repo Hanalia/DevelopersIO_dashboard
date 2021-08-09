@@ -44,7 +44,7 @@ jobs:
       run: |
         git config --local user.email "davethe@naver.com"
         git config --local user.name "developers_Auto" 
-        git add ./src/mydata/data.json
+        git add ./public/data/data.json
         git commit -m "Auto - Update data with Scraping"
         git pull origin master
     - name: Push

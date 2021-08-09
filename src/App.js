@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, usePagination, useSortBy } from 'react-table'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import realdata from "./mydata/data.json";
+// import realdata from "./mydata/data.json";
 import styled from "styled-components";
 // import fetch from 'node-fetch' 
 import axios from 'axios';
@@ -16,11 +16,11 @@ const Styles = styled.div`
   }
 
 `
-const fetchData = () => {
-    axios.get("data/data.json")
-        .then(res => console.log(res.data))
-};
-fetchData()
+// const fetchData = () => {
+//     axios.get("data/data.json")
+//         .then(res => console.log(res.data))
+// };
+// fetchData()
 
 
 function Table({ columns, data }) {
@@ -157,16 +157,16 @@ function Table({ columns, data }) {
 function PaginationTableComponent() {
 
     // 내가 받아오는 data는 dynamic 하니까 useState로 담기
-    // const [mydata, setData] = useState()
+    const [mydata, setData] = useState()
     // // fetch data로 가져온다고 보기
-    // const fetchData = () => {
-    //     axios.get("./mydata/data.json")
-    //         .then(res => setData(res.data))
-    //         .then(response => console.log(response))
-    // };
-    // useEffect(() => {
-    //     fetchData()
-    // }, []);
+    const fetchData = () => {
+        axios.get("data/data.json")
+            .then(res => setData(res.data))
+            .then(response => console.log(response))
+    };
+    useEffect(() => {
+        fetchData()
+    }, []);
 
 
     const columns = React.useMemo(
@@ -197,7 +197,7 @@ function PaginationTableComponent() {
             },
 
         ],
-        [realdata]
+        [mydata]
     )
 
     // function processData(jsonData) {
@@ -206,8 +206,8 @@ function PaginationTableComponent() {
     //   }
 
     const data = React.useMemo(
-        () => realdata,
-        [realdata]
+        () => mydata,
+        [mydata]
     )
 
 
