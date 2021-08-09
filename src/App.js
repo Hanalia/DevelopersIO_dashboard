@@ -17,7 +17,7 @@ const Styles = styled.div`
 
 `
 const fetchData = () => {
-    axios.get("mydata/data.json")
+    axios.get("data/data.json")
         .then(res => console.log(res.data))
 };
 fetchData()
