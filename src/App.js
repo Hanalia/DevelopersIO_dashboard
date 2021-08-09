@@ -24,6 +24,7 @@ const Styles = styled.div`
 
 
 function Table({ columns, data }) {
+    // console.log(data)
     // Use the state and functions returned from useTable to build your UI
     const {
         getTableProps,
@@ -157,12 +158,12 @@ function Table({ columns, data }) {
 function PaginationTableComponent() {
 
     // 내가 받아오는 data는 dynamic 하니까 useState로 담기
-    const [mydata, setData] = useState()
+    const [mydata, setData] = useState([])
     // // fetch data로 가져온다고 보기
     const fetchData = () => {
         axios.get("data/data.json")
             .then(res => setData(res.data))
-            .then(response => console.log(response))
+            .then(console.log(mydata))
     };
     useEffect(() => {
         fetchData()
@@ -210,7 +211,7 @@ function PaginationTableComponent() {
         [mydata]
     )
 
-
+    // console.log(data)
 
     return (
         <Styles>
