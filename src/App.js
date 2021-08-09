@@ -171,7 +171,7 @@ function PaginationTableComponent() {
                 //  width: 100,
             },
             {
-                Header: 'Title',
+                Header: 'Title2',
                 accessor: 'title',
                 className: "title",
                 //  width: 250,
