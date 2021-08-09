@@ -1,9 +1,9 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { useTable, usePagination, useSortBy } from 'react-table'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import mydata from "./mydata/data.json";
 import styled from "styled-components";
+// import fetch from 'node-fetch' 
 
 
 const Styles = styled.div`
@@ -151,6 +151,17 @@ function Table({ columns, data }) {
 
 function PaginationTableComponent() {
 
+    // 내가 받아오는 data는 dynamic 하니까 useState로 담기
+    // const [mydata, setData] = useState()
+    // // fetch data로 가져온다고 보기
+    // const fetchData = () => {
+    //     fetch("./mydata/data.json")
+    //         .then(res => setData(res.json))
+    // };
+    // useEffect(() => {
+    //     fetchData()
+    // }, []);
+
 
     const columns = React.useMemo(
         () => [
@@ -180,12 +191,17 @@ function PaginationTableComponent() {
             },
 
         ],
-        [mydata]
+        []
     )
 
+    function processData(jsonData) {
+        const result = Object.keys(jsonData).map((key) => {return jsonData[key]; });
+        return result;
+      }
+
     const data = React.useMemo(
-        () => mydata,
-        [mydata]
+        () => processData(mydata),
+        [processData(mydata)]
     )
 
 
