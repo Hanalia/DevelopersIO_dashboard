@@ -151,6 +151,7 @@ function Table({ columns, data }) {
 
 function PaginationTableComponent() {
 
+
     const columns = React.useMemo(
         () => [
             {
@@ -179,40 +180,14 @@ function PaginationTableComponent() {
             },
 
         ],
-        [[
-            {
-                Header: 'Date',
-                accessor: 'date',
-                //  width: 100,
-            },
-            {
-                Header: 'Title',
-                accessor: 'title',
-                className: "title",
-                //  width: 250,
-                Cell: ({ row }) => <a href={row.original.url}>{row.original.title}</a>,
-            },
-            {
-                Header: 'Title(en)',
-                accessor: 'translated',
-                className: "title",
-                // width: 250,  
-            },
-            {
-                Header: 'Likes',
-                accessor: 'likes',
-                //  width: 60,
-
-            },
-
-        ]]
+        [mydata]
     )
-
 
     const data = React.useMemo(
         () => mydata,
         [mydata]
     )
+
 
 
     return (
