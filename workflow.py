@@ -15,7 +15,7 @@ import os
 
 # needs to import KEY from secrets
 KEY = os.environ['GOOGLE_KEY']
-filepath = './public/data/data.json'
+filepath = './src/data/data.json'
 ## step 1 : import json file to df
 df1 = pd.read_json(filepath)
 
