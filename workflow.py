@@ -94,10 +94,10 @@ def google_translate(api_key, text_to_translate, to_language):
     translated_text = translated_text.replace('0x0A', '\\n')
     return translated_text
 
-
+### updates 20210815 - resource for translation is enough, and updates for recent data and upvotes is more important
 ## to save resources, drop common values between df1(orignal data) and df2( new data)
-cond = df2['url'].isin(df1['url'])
-df2.drop(df2[cond].index, inplace = True)
+# cond = df2['url'].isin(df1['url'])
+# df2.drop(df2[cond].index, inplace = True)
 
 # add trans from df2
 
@@ -110,7 +110,7 @@ df2 = add_trans(df2,'title',KEY,'en')
 df2['date'] =pd.to_datetime(df2['date'], format='%Y-%m-%d')
 
 # 합치기
-finaldf = pd.concat([df1,df2],ignore_index=True)
+finaldf = pd.concat([df2,df1],ignore_index=True)
 
 # 혹시 모르니 drop duplicates 해주기
 finaldf = finaldf.drop_duplicates('url')
